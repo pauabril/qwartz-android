@@ -1,6 +1,6 @@
 {
   "name": "qwartz-android",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,6 +20,7 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.9.6",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^24.10.9",
     "@vitejs/plugin-vue": "^6.0.3",
