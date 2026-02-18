@@ -15,6 +15,7 @@
     "format": "oxfmt src/"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/vue-form": "^1.28.3",
     "@vueuse/core": "^14.2.1",
@@ -30,6 +31,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@iconify-json/tabler": "^1.2.26",
     "@tauri-apps/cli": "^2.9.6",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^24.10.9",
