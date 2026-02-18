@@ -2,9 +2,9 @@
 import { ref, computed } from "vue";
 
 import { Card, CardContent } from "@/components/ui/card";
-// import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 
-// const { t, d } = useI18n();
+const router = useRouter();
 
 const items = ref<Array<{ id: number; name: string }>>([
   { id: 1, name: "Item One" },
@@ -30,7 +30,7 @@ const items = ref<Array<{ id: number; name: string }>>([
 
 <template>
   <div class="flex flex-col gap-4 p-2">
-    <Card v-for="item in items" :key="item.id">
+    <Card v-for="item in items" :key="item.id" @click="router.push({ name: 'new-time-entry' })">
       <CardContent>
         <h1 class="text-lg font-bold">{{ item.name }}</h1>
         <p>This is a card component.</p>
