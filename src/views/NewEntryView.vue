@@ -37,9 +37,9 @@ const formSchema = z.object({
 
 const form = useForm({
   defaultValues: {
-    start: "",
-    end: "",
-    date: "",
+    start: "00:00:00",
+    end: "00:00:00",
+    date: "2026-01-01",
     title: "",
     tags: "",
   },
@@ -102,6 +102,8 @@ const duration = computed(() => {
             :model-value="field.state.value"
             :aria-invalid="isInvalid(field)"
             placeholder=""
+            type="time"
+            step="1"
             autocomplete="off"
             @blur="field.handleBlur"
             @input="field.handleChange($event.target.value)"
@@ -120,6 +122,8 @@ const duration = computed(() => {
             :model-value="field.state.value"
             :aria-invalid="isInvalid(field)"
             placeholder=""
+            type="time"
+            step="1"
             autocomplete="off"
             @blur="field.handleBlur"
             @input="field.handleChange($event.target.value)"
@@ -139,6 +143,7 @@ const duration = computed(() => {
             :model-value="field.state.value"
             :aria-invalid="isInvalid(field)"
             placeholder=""
+            type="date"
             autocomplete="off"
             @blur="field.handleBlur"
             @input="field.handleChange($event.target.value)"
