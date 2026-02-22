@@ -120,8 +120,8 @@ const timeEntries = ref([
     <Separator />
     <!-- ----------------------------------------------------------------------------------- -->
 
-    <div class="flex flex-row items-center justify-center gap-4">
-      <Card v-for="entry in timeEntries" :key="entry.id">
+    <div class="flex flex-row items-center justify-center gap-4 mr-4">
+      <Card v-for="entry in timeEntries" :key="entry.id" class="w-full">
         <CardContent class="flex flex-row">
           <div class="flex flex-col gap-2">
             <h1 class="text-lg font-bold line-clamp-1">{{ entry.title }}</h1>
@@ -153,12 +153,12 @@ const timeEntries = ref([
     <Separator />
     <!-- ----------------------------------------------------------------------------------- -->
 
-    <div class="flex flex-row items-center justify-center gap-4">
+    <div class="flex flex-row items-center justify-center gap-4 ml-4">
       <Button variant="link" size="icon-lg">
         <Icon icon="tabler:copy" class="size-6" />
       </Button>
 
-      <Card v-for="entry in timeEntries" :key="entry.id">
+      <Card v-for="entry in timeEntries" :key="entry.id" class="w-full">
         <CardContent class="flex flex-row">
           <div class="flex flex-col gap-2">
             <h1 class="text-lg font-bold line-clamp-1">{{ entry.title }}</h1>
