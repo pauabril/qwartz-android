@@ -91,7 +91,8 @@ const distributionDrawerOpen = ref(false)
                 v-for="(type, typeKey) in distributionTypesMap"
                 :key="typeKey"
                 size="lg"
-                :variant="activeDistributionType === typeKey ? 'default' : 'secondary'"
+                variant="secondary"
+                :disabled="typeKey === activeDistributionType"
                 @click="
                   () => {
                     activeDistributionType = typeKey
