@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/chart'
 
 interface Data {
-  date: string
+  date: Date
   hours: number
 }
 
