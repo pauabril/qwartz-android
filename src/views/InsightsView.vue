@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import WeekBarChart from '@/components/charts/week-bar-chart/WeekBarChart.vue'
 import TagsPieChart from '@/components/charts/tags-pie-chart/TagsPieChart.vue'
+
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -10,6 +12,17 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+import { Separator } from '@/components/ui/separator'
 
 const weekData = [
   { date: new Date('2026-01-05'), hours: 7.5 },
@@ -28,6 +41,15 @@ const tagsData = [
   { tag: 'Tag 03', hours: 5, fill: 'var(--chart-3)' },
 ]
 const tagsTotal = computed(() => tagsData.reduce((acc, curr) => acc + curr.hours, 0))
+
+const distributionTypesMap = {
+  tag: { label: 'Tag' },
+  day: { label: 'Day' },
+  week: { label: 'Week' },
+  month: { label: 'Month' },
+}
+const activeDistributionType = ref<keyof typeof distributionTypesMap>('tag')
+const distributionDrawerOpen = ref(false)
 </script>
 
 <template>
@@ -45,10 +67,45 @@ const tagsTotal = computed(() => tagsData.reduce((acc, curr) => acc + curr.hours
     <Card>
       <CardHeader>
         <CardTitle>Tags distribution</CardTitle>
-        <CardDescription
-          >Group by <span class="text-foreground underline">Tag</span></CardDescription
-        >
+
+        <Drawer v-model:open="distributionDrawerOpen">
+          <CardDescription
+            >Group by
+            <DrawerTrigger>
+              <Button variant="link" class="p-0! h-max w-max gap-0.5">{{
+                distributionTypesMap[activeDistributionType].label
+              }}</Button>
+            </DrawerTrigger>
+          </CardDescription>
+
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Group by</DrawerTitle>
+            </DrawerHeader>
+            <div class="px-4">
+              <Separator />
+            </div>
+
+            <DrawerFooter>
+              <Button
+                v-for="(type, typeKey) in distributionTypesMap"
+                :key="typeKey"
+                size="lg"
+                :variant="activeDistributionType === typeKey ? 'default' : 'secondary'"
+                @click="
+                  () => {
+                    activeDistributionType = typeKey
+                    distributionDrawerOpen = false
+                  }
+                "
+              >
+                {{ type.label }}
+              </Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </CardHeader>
+
       <CardContent>
         <TagsPieChart :chartData="tagsData" />
       </CardContent>
