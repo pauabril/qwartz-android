@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { ref, computed } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
-import { Icon } from "@iconify/vue";
+import { Icon } from '@iconify/vue'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 
-const route = useRoute();
+const route = useRoute()
 
 interface NavBarButton {
-  name: string;
-  label: string;
-  icon: string;
+  name: string
+  label: string
+  icon: string
 }
 
 interface Props {
-  buttons: NavBarButton[];
-  orientation?: "horizontal" | "vertical"; // TODO: implement vertical orientation
+  buttons: NavBarButton[]
+  orientation?: 'horizontal' | 'vertical' // TODO: implement vertical orientation
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  orientation: "horizontal",
-});
+  orientation: 'horizontal',
+})
 
-const isNavRoute = computed(() => ["calendar", "list", "insights"].includes(route.name as string));
+const isNavRoute = computed(() => ['calendar', 'list', 'insights'].includes(route.name as string))
 
-const shouldExpand = (btnName: string) => !isNavRoute.value || route.name === btnName;
+const shouldExpand = (btnName: string) => !isNavRoute.value || route.name === btnName
 </script>
 
 <template>

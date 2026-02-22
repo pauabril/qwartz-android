@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { useForm } from "@tanstack/vue-form";
-import * as z from "zod";
+import { useForm } from '@tanstack/vue-form'
+import * as z from 'zod'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   Field,
   FieldContent,
@@ -17,7 +17,7 @@ import {
   FieldSeparator,
   FieldSet,
   FieldTitle,
-} from "@/components/ui/field";
+} from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -25,62 +25,62 @@ import {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
-} from "@/components/ui/input-group";
+} from '@/components/ui/input-group'
 
 const formSchema = z.object({
   start: z.iso.time(),
   end: z.iso.time(),
   date: z.iso.date(),
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(1, 'Title is required'),
   tags: z.string(),
-});
+})
 
 const form = useForm({
   defaultValues: {
-    start: "00:00:00",
-    end: "00:00:00",
-    date: "2026-01-01",
-    title: "",
-    tags: "",
+    start: '00:00:00',
+    end: '00:00:00',
+    date: '2026-01-01',
+    title: '',
+    tags: '',
   },
   validators: {
     onChange: formSchema,
   },
   onSubmit: (values) => {
-    console.log("Form submitted with values:", values);
+    console.log('Form submitted with values:', values)
   },
-});
+})
 
 function isInvalid(field: { state: { meta: { isTouched: any; isValid: any } } }) {
-  return field.state.meta.isTouched && !field.state.meta.isValid;
+  return field.state.meta.isTouched && !field.state.meta.isValid
 }
 
-const formValues = form.useStore((state) => state.values);
+const formValues = form.useStore((state) => state.values)
 
 const duration = computed(() => {
   if (!formValues.value.start || !formValues.value.end) {
-    return "00:00:00";
+    return '00:00:00'
   }
 
   // return duration in HH:MM:SS format
   // const start = new Date(formValues.value.start);
   // const end = new Date(formValues.value.end);
-  const start = new Date(`1970-01-01T${formValues.value.start}`);
-  const end = new Date(`1970-01-01T${formValues.value.end}`);
+  const start = new Date(`1970-01-01T${formValues.value.start}`)
+  const end = new Date(`1970-01-01T${formValues.value.end}`)
 
   if (!start.getTime() || !end.getTime()) {
-    return "00:00:00";
+    return '00:00:00'
   }
 
-  const diff = end.getTime() - start.getTime();
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  const diff = end.getTime() - start.getTime()
+  const hours = Math.floor(diff / (1000 * 60 * 60))
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
 
-  return `${hours.toString().padStart(2, "0")}:${minutes
+  return `${hours.toString().padStart(2, '0')}:${minutes
     .toString()
-    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-});
+    .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+})
 </script>
 
 <template>
