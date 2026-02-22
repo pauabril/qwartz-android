@@ -1,4 +1,5 @@
 import java.util.Properties
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
@@ -24,6 +25,26 @@ android {
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
         versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
     }
+    signingConfigs {
+        create("release") {
+            val keystorePropertiesFile = rootProject.file("key.properties")
+            val keystoreProperties = Properties()
+            if (!keystorePropertiesFile.exists()) {
+                throw GradleException("Missing key.properties file at: ${keystorePropertiesFile.absolutePath}")
+            } else {
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            }
+
+            fun requireProperty(name: String): String =
+                keystoreProperties.getProperty(name)
+                    ?: throw GradleException("Missing required property '$name' in key.properties")
+
+            keyAlias = requireProperty("keyAlias")
+            keyPassword = requireProperty("password")
+            storeFile = file(requireProperty("storeFile"))
+            storePassword = requireProperty("password")
+        }
+    }
     buildTypes {
         getByName("debug") {
             manifestPlaceholders["usesCleartextTraffic"] = "true"
@@ -37,6 +58,7 @@ android {
             }
         }
         getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             proguardFiles(
                 *fileTree(".") { include("**/*.pro") }
