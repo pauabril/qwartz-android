@@ -103,7 +103,7 @@ useSwipe(container, {
         "
         ><Icon icon="tabler:arrow-right" class="size-6"
       /></Button>
-      <Button v-else size="lg" :as="RouterLink" :to="{ name: 'list' }">Let's go</Button>
+      <Button v-else size="lg" :as="RouterLink" :to="{ name: 'login' }">Let's go</Button>
     </div>
   </nav>
 </template>
