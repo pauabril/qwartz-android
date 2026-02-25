@@ -39,6 +39,41 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/onboarding',
+      name: 'onboarding-root',
+      component: () => import('../layouts/OnboardingLayout.vue'),
+      redirect: '/onboarding/1',
+      meta: {
+        fullscreen: true,
+      },
+      children: [
+        {
+          path: '1',
+          name: 'onboarding-1',
+          component: () => import('../views/onboarding/Slide1.vue'),
+          meta: { index: 1 },
+        },
+        {
+          path: '2',
+          name: 'onboarding-2',
+          component: () => import('../views/onboarding/Slide2.vue'),
+          meta: { index: 2 },
+        },
+        {
+          path: '3',
+          name: 'onboarding-3',
+          component: () => import('../views/onboarding/Slide3.vue'),
+          meta: { index: 3 },
+        },
+        {
+          path: '4',
+          name: 'onboarding-4',
+          component: () => import('../views/onboarding/Slide4.vue'),
+          meta: { index: 4 },
+        },
+      ],
+    },
   ],
 })
 
