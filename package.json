@@ -13,7 +13,9 @@
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
-    "format": "oxfmt src/"
+    "format": "oxfmt src/",
+    "tauri:dev": "bunx --bun tauri dev",
+    "tauri:build:apk": "bunx --bun tauri android build --apk true"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
