@@ -201,5 +201,56 @@ const timeEntries = ref([
         </div>
       </CardContent>
     </Card>
+
+    <Separator />
+
+    <Card>
+      <CardContent class="flex flex-row">
+        <div class="flex flex-col gap-2">
+          <h1 class="text-lg font-bold">Debug Card</h1>
+          <div class="flex gap-2 mt-2">
+            <span
+              v-for="tag in ['tag1', 'tag2', 'tag3']"
+              :key="tag"
+              class="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-xs"
+            >
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 ml-auto">
+          00:00:00
+          <Drawer>
+            <DrawerTrigger>
+              <Button variant="ghost" size="icon-lg"
+                ><Icon icon="tabler:dots" class="size-6"
+              /></Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Debug Menu</DrawerTitle>
+              </DrawerHeader>
+              <div class="px-4">
+                <Separator />
+              </div>
+
+              <DrawerFooter>
+                <Button
+                  :as="RouterLink"
+                  :to="{ name: 'onboarding-root' }"
+                  size="lg"
+                  variant="secondary"
+                  >Onboarding</Button
+                >
+                <Button size="lg" variant="secondary">Login</Button>
+                <Button :as="RouterLink" :to="{ name: 'root' }" size="lg" variant="secondary"
+                  >Root</Button
+                >
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        </div>
+      </CardContent>
+    </Card>
   </div>
 </template>

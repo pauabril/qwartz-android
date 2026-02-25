@@ -39,6 +39,7 @@
   "devDependencies": {
     "@iconify-json/tabler": "^1.2.26",
     "@tauri-apps/cli": "^2.9.6",
+    "@tauri-apps/api": "~2.9.0",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^24.10.9",
     "@vitejs/plugin-vue": "^6.0.3",
