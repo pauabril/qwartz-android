@@ -242,7 +242,9 @@ const timeEntries = ref([
                   variant="secondary"
                   >Onboarding</Button
                 >
-                <Button size="lg" variant="secondary">Login</Button>
+                <Button :as="RouterLink" :to="{ name: 'login' }" size="lg" variant="secondary"
+                  >Login</Button
+                >
                 <Button :as="RouterLink" :to="{ name: 'root' }" size="lg" variant="secondary"
                   >Root</Button
                 >
