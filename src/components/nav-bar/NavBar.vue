@@ -29,7 +29,7 @@ const shouldExpand = (btnName: string) => !isNavRoute.value || route.name === bt
 </script>
 
 <template>
-  <nav class="bg-white border-t w-full h-16 px-4 py-2 flex justify-around gap-2 mt-auto">
+  <nav class="bg-sidebar border-t w-full px-4 py-2 flex justify-around gap-2 mt-auto">
     <Button
       v-for="btn in props.buttons"
       :key="btn.name"

@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body class="min-h-screen">
-    <div id="app" class="h-screen w-screen flex flex-col overflow-hidden"></div>
+  <body
+    class="h-screen w-screen pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] bg-sidebar"
+  >
+    <div
+      id="app"
+      class="h-full w-full flex flex-col overflow-hidden bg-background"
+    ></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
