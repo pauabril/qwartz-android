@@ -226,9 +226,6 @@ function handleDuplicateTimeEntry(id: string) {
                 <Button :as="RouterLink" :to="{ name: 'root' }" size="lg" variant="secondary"
                   >Root</Button
                 >
-                <Button :as="RouterLink" :to="{ name: 'test' }" size="lg" variant="secondary"
-                  >Swipe</Button
-                >
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
