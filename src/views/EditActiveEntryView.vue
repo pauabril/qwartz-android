@@ -7,6 +7,8 @@ import * as z from 'zod'
 
 import { Icon } from '@iconify/vue'
 
+import { useActiveTimerStore } from '@/stores/active'
+
 import { Button } from '@/components/ui/button'
 import {
   Field,
@@ -30,6 +32,8 @@ import {
 } from '@/components/ui/input-group'
 
 const router = useRouter()
+
+const activeTimer = useActiveTimerStore()
 
 const formSchema = z.object({
   start: z.iso.time(),
@@ -220,7 +224,16 @@ const duration = computed(() => {
 
     <form.Subscribe>
       <div class="absolute bottom-4 right-4 left-4 flex flex-row justify-between">
-        <Button type="submit" variant="destructive" size="lg" @click="form.handleSubmit">
+        <Button
+          variant="destructive"
+          size="lg"
+          @click="
+            () => {
+              activeTimer.stopActiveTimer()
+              form.handleSubmit()
+            }
+          "
+        >
           <Icon icon="tabler:player-stop" /> Stop timer
         </Button>
         <Button type="submit" size="lg" @click="form.handleSubmit">

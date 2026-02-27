@@ -6,6 +6,8 @@ import { uuid } from '@tanstack/vue-form'
 
 import { Icon } from '@iconify/vue'
 
+import { useActiveTimerStore } from '@/stores/active'
+
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -28,8 +30,11 @@ import {
 import { Separator } from '@/components/ui/separator'
 import ListDateSeparator from '@/components/list/list-date-separator/ListDateSeparator.vue'
 import { SwipableTimeEntryCard } from '@/components/list/time-entry-card'
+import ActivePreview from '@/components/list/active-preview/ActivePreview.vue'
 
 const router = useRouter()
+
+const activeTimer = useActiveTimerStore()
 
 interface TimeEntry {
   id: string
@@ -144,7 +149,7 @@ function handleDuplicateTimeEntry(id: string) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 p-2 py-4 overflow-x-hidden">
+  <div class="flex flex-col gap-4 p-2 py-4 overflow-x-hidden z-0">
     <template v-for="(items, date) in sortedAndGroupedTimeEntries" :key="date">
       <ListDateSeparator
         :label="
@@ -233,4 +238,15 @@ function handleDuplicateTimeEntry(id: string) {
       </CardContent>
     </Card>
   </div>
+
+  <ActivePreview v-if="activeTimer.activeItem" class="z-10 sticky bottom-0" />
+
+  <Button
+    v-else
+    class="fixed bottom-18 right-4 z-10 mb-[env(safe-area-inset-bottom)]"
+    size="lg"
+    @click="activeTimer.startActiveTimer"
+  >
+    <Icon icon="tabler:player-play" /> New
+  </Button>
 </template>
