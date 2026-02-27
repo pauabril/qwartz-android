@@ -31,6 +31,11 @@ const router = createRouter({
           name: 'time-entry-root',
           children: [
             {
+              path: 'active',
+              name: 'edit-active-entry',
+              component: () => import('../views/EditActiveEntryView.vue'),
+            },
+            {
               path: 'edit/:id',
               name: 'edit-time-entry',
               component: () => import('../views/EditEntryView.vue'),
