@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/drawer'
 import { Separator } from '@/components/ui/separator'
 import { MonthHeatmap } from '@/components/charts/month-heatmap'
+import { YearHeatmap } from '@/components/charts/year-heatmap'
 
 const weekData = [
   { date: new Date('2026-01-05'), hours: 7.5, fill: 'var(--chart-1)' },
@@ -46,6 +47,22 @@ const monthData = Array.from({ length: 27 }, (_, i) => ({
   fill: `var(--chart-${(i % 5) + 1})`,
 }))
 const monthTotal = computed(() => monthData.reduce((acc, curr) => acc + curr.hours, 0))
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+const year = 2026
+const daysInYear = Math.round(
+  (new Date(year + 1, 0, 1).getTime() - new Date(year, 0, 1).getTime()) / (1000 * 60 * 60 * 24),
+)
+const yearData = Array.from({ length: daysInYear }, (_, i) => {
+  const d = new Date(year, 0, i + 1)
+  return {
+    date: d,
+    hours: Math.floor(Math.random() * 8),
+    fill: `var(--chart-${(i % 5) + 1})`,
+  }
+})
+const yearTotal = computed(() => yearData.reduce((acc, curr) => acc + curr.hours, 0))
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -217,6 +234,16 @@ const alertUnimplemented = () => {
         </CardHeader>
         <CardContent>
           <MonthHeatmap :chartData="monthData" :month="monthData[0].date" :show-weekdays="true" />
+        </CardContent>
+      </Card>
+
+      <Card v-else-if="selectedView === 'year'">
+        <CardHeader>
+          <CardTitle>Year overview</CardTitle>
+          <CardDescription>Total: {{ yearTotal }}h</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <YearHeatmap :chartData="yearData" :year="2026" />
         </CardContent>
       </Card>
 
