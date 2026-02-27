@@ -7,7 +7,7 @@
     <div class="h-full w-full overflow-hidden">
       <!-- TODO: change to a proper image -->
       <img
-        src="https://cataas.com/cat/says/sync?size=400x400&color=green"
+        src="https://placehold.co/400"
         alt="Sync illustration"
         class="w-full h-full object-cover"
       />

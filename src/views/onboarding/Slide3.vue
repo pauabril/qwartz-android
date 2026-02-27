@@ -14,7 +14,7 @@
     <div class="h-full w-full overflow-hidden">
       <!-- TODO: change to a proper image -->
       <img
-        src="https://cataas.com/cat/says/calendar?size=400x400&color=orange"
+        src="https://placehold.co/400"
         alt="Productivity illustration"
         class="w-full h-full object-cover"
       />
