@@ -25,6 +25,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Separator } from '@/components/ui/separator'
+import { MonthHeatmap } from '@/components/charts/month-heatmap'
 
 const weekData = [
   { date: new Date('2026-01-05'), hours: 7.5, fill: 'var(--chart-1)' },
@@ -36,6 +37,15 @@ const weekData = [
   { date: new Date('2026-01-11'), hours: 0, fill: 'var(--color-purple-500)' },
 ]
 const weekTotal = computed(() => weekData.reduce((acc, curr) => acc + curr.hours, 0))
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+const monthData = Array.from({ length: 27 }, (_, i) => ({
+  date: new Date(`2026-01-${i + 5}`),
+  hours: Math.floor(Math.random() * 8),
+  fill: `var(--chart-${(i % 5) + 1})`,
+}))
+const monthTotal = computed(() => monthData.reduce((acc, curr) => acc + curr.hours, 0))
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -190,13 +200,23 @@ const alertUnimplemented = () => {
     </div>
 
     <div class="flex flex-col gap-4 p-2 h-full overflow-x-hidden overflow-y-scroll">
-      <Card>
+      <Card v-if="selectedView === 'week'">
         <CardHeader>
           <CardTitle>Hours tracked</CardTitle>
           <CardDescription>Total: {{ weekTotal }}h</CardDescription>
         </CardHeader>
         <CardContent>
           <WeekBarChart :chartData="weekData" />
+        </CardContent>
+      </Card>
+
+      <Card v-else-if="selectedView === 'month'">
+        <CardHeader>
+          <CardTitle>Hours tracked</CardTitle>
+          <CardDescription>Total: {{ monthTotal }}h</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <MonthHeatmap :chartData="monthData" :month="monthData[0].date" :show-weekdays="true" />
         </CardContent>
       </Card>
 
