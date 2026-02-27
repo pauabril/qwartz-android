@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useSwipe } from '@vueuse/core'
 
 import { useForm } from '@tanstack/vue-form'
 import * as z from 'zod'
@@ -95,14 +96,26 @@ const duration = computed(() => {
     .toString()
     .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 })
+
+const handleRef = ref<HTMLElement | null>(null)
+
+// swipe DOWN on the handle to go back
+useSwipe(handleRef, {
+  onSwipeEnd(_, direction) {
+    if (direction === 'down') router.back()
+  },
+})
 </script>
 
 <template>
   <main class="grid grid-cols-2 gap-4 p-4">
-    <div class="col-span-full flex flex-col items-stretch justify-center gap-2 mb-4">
+    <div
+      ref="handleRef"
+      class="col-span-full flex flex-col items-stretch justify-center gap-2 mb-4"
+    >
       <div class="flex items-center justify-between">
         <h1 class="font-syne text-2xl font-bold">Edit Active Time Entry</h1>
-        <Button variant="ghost" size="icon-lg" @click="router.back()"
+        <Button variant="ghost" size="icon-lg" @click.stop="router.back()"
           ><Icon icon="tabler:chevron-down" class="size-6"
         /></Button>
       </div>
